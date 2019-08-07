@@ -1,4 +1,9 @@
 <div class="container">
   <div class="title">Заголовок</div>
-  <div class="items"></div>
+  <div class="notes">
+    <ng-container #containerNotes></ng-container>
+    <div class="note empty" (click)="add()" *ngIf="!isCreatingNewNote">
+      <mat-icon svgIcon="add"></mat-icon>
+    </div>            
+  </div>
 </div>
