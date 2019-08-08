@@ -2,8 +2,13 @@
   <div class="title">Заголовок</div>
   <div class="notes">
     <ng-container #containerNotes></ng-container>
-    <div class="note empty" (click)="add()" *ngIf="!isCreatingNewNote">
-      <mat-icon svgIcon="add"></mat-icon>
-    </div>            
+    <ng-container *ngIf="!app.loading; else loadingBlock">
+      <div class="note empty" (click)="create()" *ngIf="!app.createMode">
+        <mat-icon svgIcon="add"></mat-icon>
+      </div> 
+    </ng-container>
   </div>
 </div>
+<ng-template #loadingBlock>
+  <app-loading></app-loading>
+</ng-template>

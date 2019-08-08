@@ -1,10 +1,5 @@
-export type Note = {
-  message: string,
-  timestamp: number
-};
-
-export enum NoteConditions {
-  READ,
-  EDIT,
-  LOADING
+export interface Note {
+  id: string;
+  message: string;
+  timestamp: number;
 }

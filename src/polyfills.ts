@@ -57,6 +57,11 @@
  */
 import 'zone.js/dist/zone';  // Included with Angular CLI.
 import 'core-js/es/array';
+import 'element-matches-polyfill';
+
+(window as any).process = {
+  env: { DEBUG: undefined },
+};
 
 /***************************************************************************************************
  * APPLICATION IMPORTS

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subscriber } from 'rxjs';
 import { delay } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import * as uniqid from 'uniqid';
 
 import { NotesStorageInterface, Note } from '../types';
 
@@ -9,21 +11,25 @@ import { NotesStorageInterface, Note } from '../types';
 })
 export class NotesStorageService implements NotesStorageInterface {
 
-  private readonly maxLength = 500;
+  private readonly maxLength: number = 500;
+  private readonly defaultMessageError: string =
+    `Length of message more than ${this.maxLength}`;
   private readonly keyStorage: string = 'notes';
   private storage: Array<Note>;
 
-  constructor() {
+  constructor(
+    private snackBar: MatSnackBar
+  ) {
     const storage: string = window.localStorage.getItem(this.keyStorage) || '[]';
     this.storage = JSON.parse(storage);
-  }  
+  }
 
-  public get = (timestamp?: number): Observable<Note | Note[]> => 
+  public get = (id?: string): Observable<Note | Note[]> =>
     new Observable<Note | Note[]>((subscriber: Subscriber<Note | Note[]>) => {
-      if (timestamp) {
+      if (id) {
         const note: Note | undefined = this.storage.find(
-          (item: Note) => item.timestamp === timestamp);
-        
+          (item: Note) => item.id === id);
+
         if (!note) {
           subscriber.next(note);
         } else {
@@ -34,74 +40,73 @@ export class NotesStorageService implements NotesStorageInterface {
       }
   }).pipe(
     delay(Number((Math.random() * 1000).toFixed(0)))
-  );
-  
-  public put = (message: string): Observable<Note[]> =>
-    new Observable<Note[]>((subscriber: Subscriber<Note[]>) => {
-      const nextState = [...this.storage];
-      nextState.push({
+  )
+
+  public put = (message: string): Observable<Note> =>
+    new Observable<Note>((subscriber: Subscriber<Note>) => {
+      const nextState: Note[] = [...this.storage];
+      const newNote: Note = {
+        id: uniqid(),
         message,
         timestamp: Date.now()
-      });
+      };
+      nextState.push(newNote);
       if (this.saveStorage(nextState)) {
-        subscriber.next(nextState);
+        subscriber.next(newNote);
       } else {
-        subscriber.error(`Length of message more than ${this.maxLength}`);
+        this.snackBar.open(this.defaultMessageError);
+        subscriber.error(this.defaultMessageError);
       }
   }).pipe(
     delay(Number((Math.random() * 1000).toFixed(0)))
-  ); 
-  
-  public patch = (note: Note): Observable<Note[]> => 
+  )
+
+  public patch = (id: string, message: string): Observable<Note[]> =>
     new Observable<Note[]>((subscriber: Subscriber<Note[]>) => {
-      const changeIndex: number = this.storage.findIndex((item: Note) => 
-        item.timestamp === note.timestamp);
-      
+      const changeIndex: number = this.storage.findIndex((item: Note) =>
+        item.id === id);
+
       if (changeIndex === -1) {
         subscriber.error('The note doesn\'t exist');
       } else {
         const nextState: Note[] = [...this.storage];
-        nextState[changeIndex] = note;
+        const nextStateNote: Note = nextState[changeIndex];
+        nextState[changeIndex] = {
+          id: nextStateNote.id,
+          timestamp: Date.now(),
+          message
+        };
         if (this.saveStorage(nextState)) {
           subscriber.next(nextState);
         } else {
-          subscriber.error(`Length of message more than ${this.maxLength}`);
+          this.snackBar.open(this.defaultMessageError);
+          subscriber.error(this.defaultMessageError);
         }
       }
   }).pipe(
     delay(Number((Math.random() * 1000).toFixed(0)))
-  );
+  )
 
-  public delete = (timestamp: number): Observable<Note[]> => 
+  public delete = (id: string): Observable<Note[]> =>
     new Observable<Note[]>((subscriber: Subscriber<Note[]>) => {
-      
-      const removeIndex: number = 
-        this.getNoteByTimestamp(this.storage, timestamp);
-      
+      const removeIndex: number = this.storage.findIndex(
+        (item: Note) => item.id === id);
+
       if (removeIndex === -1) {
         subscriber.error('The note doesn\'t exist');
       } else {
         const nextState: Note[] = this.storage.filter(
-          (_item: Note, index: number) => removeIndex !== index);
-
+          (item: Note, index: number) => removeIndex !== index);
         if (this.saveStorage(nextState)) {
           subscriber.next(nextState);
         } else {
-          subscriber.error(`Length of message more than ${this.maxLength}`);
+          this.snackBar.open(this.defaultMessageError);
+          subscriber.error(this.defaultMessageError);
         }
       }
   }).pipe(
     delay(Number((Math.random() * 1000).toFixed(0)))
-  );
-
-  private isValid = (storage: Note[]) => !storage.some(function(item: Note) {
-    this.messageLength += item.message.length;
-    return this.messageLength > this.maxLength;
-  }, {messageLength: 0})
-
-
-  private getNoteByTimestamp = (storage: Note[], timestamp: number): number => 
-    storage.findIndex((item: Note) => item.timestamp === timestamp)
+  )
 
   private saveStorage = (storage: Note[]): boolean => {
     const isValid = this.isValid(storage);
@@ -111,9 +116,15 @@ export class NotesStorageService implements NotesStorageInterface {
       window.localStorage.setItem(
         this.keyStorage,
         JSON.stringify(this.storage)
-      );   
+      );
     }
 
     return isValid;
   }
+
+  private isValid = (storage: Note[]) => !storage.some(function(item: Note) {
+    this.messageLength += item.message.length;
+    return this.messageLength > this.maxLength;
+  }, {messageLength: 0})
+
 }

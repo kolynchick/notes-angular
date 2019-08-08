@@ -1,1 +1,30 @@
-<p>note works!</p>
+<div class="full-height">
+  <ng-container *ngIf="loading; then loadingBlock"></ng-container>
+  <ng-container *ngIf="editMode && !loading; then editBlock"></ng-container>
+  <ng-container *ngIf="!editMode && !loading; then readBlock"></ng-container>
+</div>
+
+<ng-template #readBlock>
+  <div class="container-note read" (click)="editNote($event)">
+    <mat-icon class="remove" svgIcon="remove" (click)="removeNote($event)"></mat-icon>
+    <div class="message">{{message}}</div>
+    <div class="timestamp">{{timestamp | date : 'dd.MM.yyyy HH:mm'}}</div>
+  </div>
+</ng-template>
+<ng-template #editBlock>
+  <div class="container-note edit">
+    <textarea type="text" [(ngModel)]="message" autofocus></textarea>
+    <div class="container-buttons">
+      <button (click)="cancelNote($event)">Cancel</button>
+      <ng-container *ngIf="!createMode">
+          <button [disabled]="!message ? true : null" (click)="saveNote($event)">Save</button>
+      </ng-container>    
+      <ng-container *ngIf="createMode">
+          <button [disabled]="!message ? true : null" (click)="createNote($event)">Create</button>
+      </ng-container>
+    </div>
+  </div>
+</ng-template>
+<ng-template #loadingBlock>
+  <app-loading></app-loading>
+</ng-template>

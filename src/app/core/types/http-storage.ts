@@ -5,11 +5,11 @@ import { Observable } from 'rxjs';
 
 export interface NotesStorageInterface {
 
-  get(timestamp?: number): Observable<Note | Note[]>;
+  get(id?: string): Observable<Note | Note[]>;
 
-  put(message: string): Observable<Note[]>;
+  put(message: string): Observable<Note>;
 
-  patch(note: Note): Observable<Note[]>;
+  patch(id: string, message: string): Observable<Note[]>;
 
-  delete(timestamp: number): Observable<Note[]>;
+  delete(id: string): Observable<Note[]>;
 }

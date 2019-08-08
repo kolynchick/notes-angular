@@ -1,50 +1,41 @@
-import { 
-  Component, 
-  ViewChild, 
-  ViewContainerRef, 
-  AfterContentInit, 
-  ComponentFactoryResolver, 
-  ComponentRef
+import {
+  Component,
+  ViewChild,
+  ViewContainerRef,
+  AfterContentInit,
+  OnDestroy
 } from '@angular/core';
-import { NotesStorageService } from './core/services/notes-storage.service';
-import { Note } from './core/types';
-import { NoteComponent } from './note/note.component';
 import { IconService } from './core/services/icon.service';
+import { AppService } from './app.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  providers: [AppService]
 })
-export class AppComponent implements AfterContentInit {
+export class AppComponent implements AfterContentInit, OnDestroy {
   @ViewChild('containerNotes', {
-    read: ViewContainerRef, 
+    read: ViewContainerRef,
     static: true
   }) containerNotes: ViewContainerRef;
 
-  public isCreatingNewNote: boolean;
-
   constructor(
-    private notesStorage: NotesStorageService,
-    private icon: IconService,
-    private resolver: ComponentFactoryResolver,
+    private app: AppService,
+    private icon: IconService
   ) {
     this.icon.addSvgIcon(['add', 'remove']);
   }
 
-  public add = () => {
+  public create = () => {
+    this.app.createNewNote();
+  }
 
+  ngOnDestroy() {
+    this.app.unsubscribeAll();
   }
 
   ngAfterContentInit() {
-    this.notesStorage.get().subscribe((notes: Note[]) => {
-        const component = this.attach();
-    });
+    this.app.initialize(this.containerNotes);
   }
-
-  private attach = (): ComponentRef<NoteComponent> => 
-    this.containerNotes.createComponent(this.resolver
-      .resolveComponentFactory(NoteComponent));
-
-
 }
