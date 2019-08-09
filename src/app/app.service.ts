@@ -147,7 +147,7 @@ export class AppService {
         component.instance[key] = options[key];
       });
     }
-    console.log(component);
+
     return component;
   }
 

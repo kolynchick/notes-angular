@@ -54,7 +54,9 @@ export class NotesStorageService implements NotesStorageInterface {
       if (this.saveStorage(nextState)) {
         subscriber.next(newNote);
       } else {
-        this.snackBar.open(this.defaultMessageError);
+        this.snackBar.open(this.defaultMessageError, '', {
+          duration: 2000
+        });
         subscriber.error(this.defaultMessageError);
       }
   }).pipe(
@@ -79,7 +81,9 @@ export class NotesStorageService implements NotesStorageInterface {
         if (this.saveStorage(nextState)) {
           subscriber.next(nextState);
         } else {
-          this.snackBar.open(this.defaultMessageError);
+          this.snackBar.open(this.defaultMessageError, '', {
+            duration: 2000
+          });
           subscriber.error(this.defaultMessageError);
         }
       }
@@ -100,7 +104,9 @@ export class NotesStorageService implements NotesStorageInterface {
         if (this.saveStorage(nextState)) {
           subscriber.next(nextState);
         } else {
-          this.snackBar.open(this.defaultMessageError);
+          this.snackBar.open(this.defaultMessageError, '', {
+            duration: 2000
+          });
           subscriber.error(this.defaultMessageError);
         }
       }
@@ -122,9 +128,10 @@ export class NotesStorageService implements NotesStorageInterface {
     return isValid;
   }
 
-  private isValid = (storage: Note[]) => !storage.some(function(item: Note) {
-    this.messageLength += item.message.length;
-    return this.messageLength > this.maxLength;
-  }, {messageLength: 0})
+  private isValid = (storage: Note[]) =>
+    storage.every(function(item: Note) {
+      this.messageLength += item.message.length;
+        return this.messageLength < this.maxLength;
+    }, {messageLength: 0, maxLength: this.maxLength})
 
 }
