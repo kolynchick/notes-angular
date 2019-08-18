@@ -6,6 +6,15 @@ export const environment = {
   production: false
 };
 
+export const validationStorage = {
+  maxLength: {
+    value: 500,
+    message: `Length of messages should be less than 500` 
+  }
+};
+
+export const keyStorage = 'notes';
+
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

@@ -4,9 +4,10 @@ import {
   ComponentFactoryResolver,
   ComponentRef
 } from '@angular/core';
-import { NotesStorageService } from './core/services/notes-storage.service';
+import { NoteAPIService } from './core/services/note-api.service';
 import { Note } from './core/types';
 import { NoteComponent } from './note/note.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 export class AppService {
 
@@ -17,13 +18,14 @@ export class AppService {
   private subs: Map<string, Subscription[]> = new Map();
 
   constructor(
-    private notesStorage: NotesStorageService,
-    private resolver: ComponentFactoryResolver
+    private resolver: ComponentFactoryResolver,
+    private snackBar: MatSnackBar,
+    private noteAPIService: NoteAPIService
   ) { }
 
   public initialize = (containerNotes: ViewContainerRef): void => {
     this.containerNotes = containerNotes;
-    this.notesStorage.get().subscribe((notes: Note[]) => {
+    this.noteAPIService.get().subscribe((notes: Note[]) => {
       this.loading = false;
       notes.forEach((note: Note) => {
         const component: ComponentRef<NoteComponent> = this.attach(note);
@@ -46,7 +48,7 @@ export class AppService {
     const unsubscribeAll = () =>
       subs.forEach((subscription: Subscription) => {
         subscription.unsubscribe();
-    });
+      });
 
     subs = [
       instance.Cancel.subscribe(() => {
@@ -54,9 +56,9 @@ export class AppService {
         this.destroy(component);
         this.createMode = false;
       }),
-      instance.Create.subscribe((data: {message: string}) => {
+      instance.Create.subscribe((data: { message: string }) => {
         component.instance.loading = true;
-        this.notesStorage.put(data.message).subscribe((note: Note) => {
+        this.noteAPIService.put(data.message).subscribe((note: Note) => {
           this.createMode = false;
 
           component.instance.editMode = false;
@@ -69,7 +71,8 @@ export class AppService {
 
           unsubscribeAll();
           this.subscribe(component);
-        }, () => {
+        }, (message: string) => {
+          this.snackBar.open(message, '', { duration: 2000 });
           component.instance.loading = false;
         });
       }),
@@ -81,7 +84,7 @@ export class AppService {
       (subscriptions: Subscription[]) =>
         subscriptions.forEach(
           (subscription: Subscription) =>
-          subscription.unsubscribe()));
+            subscription.unsubscribe()));
   }
 
   private subscribe = (component: ComponentRef<NoteComponent>): void => {
@@ -92,33 +95,38 @@ export class AppService {
       instance.Cancel.subscribe(() => {
         instance.editMode = false;
         instance.message = prevStateMessage;
+      }, (message: string) => {
+        this.snackBar.open(message, '', { duration: 2000 });
       }),
       instance.Edit.subscribe(() => {
         instance.editMode = true;
         prevStateMessage = instance.message;
+      }, (message: string) => {
+        this.snackBar.open(message, '', { duration: 2000 });
       }),
-      instance.Remove.subscribe((data: {id: string}) => {
+      instance.Remove.subscribe((data: { id: string }) => {
         instance.loading = true;
-        this.notesStorage.delete(data.id).subscribe(() => {
+        this.noteAPIService.delete(data.id).subscribe(() => {
           instance.editMode = false;
           instance.loading = false;
 
           this.destroy(component);
           this.unsubscribe(component);
-        }, () => {
+        }, (message: string) => {
+          this.snackBar.open(message, '', { duration: 2000 });
           instance.loading = false;
         });
-
       }),
-      instance.Save.subscribe((data: {id: string, message: string}) => {
+      instance.Save.subscribe((data: { id: string, message: string }) => {
         instance.loading = true;
-        this.notesStorage.patch(data.id, data.message)
+        this.noteAPIService.patch(data.id, data.message)
           .subscribe(() => {
             instance.editMode = false;
             instance.loading = false;
-        }, () => {
-          instance.loading = false;
-        });
+          }, (message: string) => {
+            this.snackBar.open(message, '', { duration: 2000 });
+            instance.loading = false;
+          });
       })
     ]);
   }
@@ -131,7 +139,7 @@ export class AppService {
 
   private attach = (
     note: Note | null,
-    options?: {createMode: boolean, editMode: boolean}
+    options?: { createMode: boolean, editMode: boolean }
   ): ComponentRef<NoteComponent> => {
     const component = this.containerNotes.createComponent(
       this.resolver.resolveComponentFactory(NoteComponent));

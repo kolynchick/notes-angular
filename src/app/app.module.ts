@@ -6,7 +6,6 @@ import { FormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NoteComponent } from './note/note.component';
 import { LoadingComponent } from './shared/loading/loading.component';
@@ -19,7 +18,6 @@ import { LoadingComponent } from './shared/loading/loading.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     MatIconModule,
     HttpClientModule,
     FormsModule,

@@ -3,7 +3,7 @@
 import { Note } from './note';
 import { Observable } from 'rxjs';
 
-export interface NotesStorageInterface {
+export interface NoteAPI {
 
   get(id?: string): Observable<Note | Note[]>;
 
