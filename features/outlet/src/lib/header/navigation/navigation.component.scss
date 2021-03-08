@@ -1,0 +1,61 @@
+@import '_colors';
+
+:host {
+  flex: 1;
+  height: 100%;
+  display: flex;
+
+  .path {
+    text-decoration: none;
+
+    cursor: pointer;
+
+    &.active {
+      .path {
+        &__item {
+          background-color: $primary;
+
+          &__text {
+            font-size: 18px;
+            color: $white;
+          }
+
+          &__icon::ng-deep {
+            svg {
+              font-size: 24px;
+
+              path {
+                color: $white;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &__item {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      padding-left: 24px;
+      padding-right: 24px;
+
+      &:hover {
+        background-color: $primary20;
+      }
+
+      &__icon::ng-deep {
+        font-size: 24px;
+
+        path {
+          color: $primary;
+        }
+      }
+
+      &__text {
+        padding-left: 12px;
+        color: $primary;
+      }
+    }
+  }
+}

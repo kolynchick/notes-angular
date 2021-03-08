@@ -1,0 +1,23 @@
+:host {
+  height: 100%;
+  overflow: auto;
+  padding: 24px;
+
+  .grid {
+    display: grid;
+    gap: 12px 12px;
+    grid-auto-rows: minmax(100px, calc(25% - 12px));
+
+    &.big-tiles {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    &.small-tiles {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    &.lines {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+}

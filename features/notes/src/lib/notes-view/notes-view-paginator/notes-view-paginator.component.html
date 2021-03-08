@@ -1,0 +1,3 @@
+<ng-container *ngIf="(pagination$ | async) as pagination">
+  <button mat-raised-button color="primary" *ngIf="showPaginator$ | async" (click)="load(pagination)">Load More</button>
+</ng-container>

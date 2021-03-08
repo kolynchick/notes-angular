@@ -1,0 +1,30 @@
+@import '_colors';
+
+:host {
+  border: 2px solid $primary;
+  background-color: rgba($primary20, 0.2);
+  display: flex;
+  flex-direction: column;
+  padding: 6px 48px 6px 6px;
+  position: relative;
+
+  .title {
+    line-height: 16px;
+    padding-bottom: 6px;
+    padding-right: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    color: $text;
+    height: 24px;
+    overflow: auto;
+  }
+
+  .message {
+    flex: 1;
+    padding-right: 12px;
+    font-size: 12px;
+    color: $text;
+    word-break: break-all;
+    overflow: auto;
+  }
+}

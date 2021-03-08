@@ -1,0 +1,10 @@
+<a class="path" *ngFor="let path of paths" [ngClass]="{'active': path.url === currentPath}" [routerLink]="path.url">
+  <div class="path__item">
+    <div class="path__item__icon">
+      <fa-icon [icon]="path.icon"></fa-icon>
+    </div>
+    <div class="path__item__text">
+      {{path.name}}
+    </div>
+  </div>
+</a>

@@ -1,0 +1,6 @@
+<fa-icon [ngClass]="{'select': (viewMode$ | async) === 'lines'}" [icon]="['fas', 'bars']"
+  (click)="toggleToLinesViewMode()"></fa-icon>
+<fa-icon [ngClass]="{'select': (viewMode$ | async) === 'small-tiles'}" [icon]="['fas', 'th']"
+  (click)="toggleToSmallTilesViewMode()"></fa-icon>
+<fa-icon [ngClass]="{'select': (viewMode$ | async) === 'big-tiles'}" [icon]="['fas', 'th-large']"
+  (click)="toggleToBigTilesViewMode()"></fa-icon>

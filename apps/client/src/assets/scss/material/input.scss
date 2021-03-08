@@ -1,0 +1,19 @@
+.mat-form-field.mat-focused {
+  .mat-form-field-ripple {
+    background-color: transparent !important;
+    transition: none !important;
+  }
+}
+
+.mat-form-field-wrapper {
+  padding: 0 !important;
+}
+
+.mat-form-field-infix {
+  padding: 0 !important;
+  border: 0 !important;
+}
+
+.mat-form-field-underline {
+  bottom: -2px !important;
+}

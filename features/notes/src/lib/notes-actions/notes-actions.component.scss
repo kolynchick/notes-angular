@@ -1,0 +1,13 @@
+:host {
+  display: flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 24px 24px 0px 24px;
+
+  .flex-end {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+}

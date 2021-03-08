@@ -1,0 +1,16 @@
+@import '_colors';
+
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 24px;
+
+  mat-spinner::ng-deep {
+    margin-right: 12px;
+
+    circle {
+      stroke: $primary !important;
+    }
+  }
+}

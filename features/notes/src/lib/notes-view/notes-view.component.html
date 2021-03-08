@@ -1,0 +1,5 @@
+<div class="grid" [class]="(viewMode$ | async)">
+  <app-create-note></app-create-note>
+  <app-note [note]="note" *ngFor="let note of notes$ | async"></app-note>
+</div>
+<app-notes-view-paginator></app-notes-view-paginator>

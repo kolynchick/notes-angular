@@ -1,0 +1,31 @@
+:host {
+  height: 100%;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .mat-form-field-message::ng-deep {
+    margin-top: 6px;
+    flex: 1;
+
+    .mat-form-field-wrapper {
+      height: 100%;
+
+      .mat-form-field-flex {
+        height: 100%;
+
+        .mat-form-field-infix {
+          height: 100%;
+        }
+      }
+    }
+  }
+
+  textarea {
+    resize: none;
+    height: 100%;
+  }
+}

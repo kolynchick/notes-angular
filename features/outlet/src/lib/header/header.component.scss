@@ -1,0 +1,8 @@
+@import "_colors";
+
+:host {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid;
+}

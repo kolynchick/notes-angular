@@ -1,0 +1,11 @@
+<ng-container *ngIf="(edit$ | async); else readMode">
+  <fa-icon class="note-actions-cancel" [icon]="['fas','times']" (click)="cancel()"></fa-icon>
+  <fa-icon class="note-actions-save" [icon]="['fas','check']" (click)="save()"></fa-icon>
+  <app-note-edit-form [note]="note" (changed)="changed($event)"></app-note-edit-form>
+</ng-container>
+<ng-template #readMode>
+  <fa-icon class="note-actions-edit" [icon]="['far','edit']" (click)="edit()"></fa-icon>
+  <div class="title">{{note.title}}</div>
+  <div class="message">{{note.message}}</div>
+  <fa-icon class="note-actions-remove" [icon]="['far','trash-alt']" (click)="remove()"></fa-icon>
+</ng-template>

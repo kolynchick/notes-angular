@@ -1,0 +1,28 @@
+@import '_colors';
+
+:host {
+  display: flex;
+  justify-self: flex-end;
+
+  fa-icon {
+    font-size: 24px;
+    padding-left: 6px;
+    padding-right: 6px;
+    border-radius: 6px;
+    cursor: pointer;
+
+    &:first-child() {
+      padding-left: 0px;
+    }
+
+    &:last-child() {
+      padding-right: 0px;
+    }
+
+    &.select {
+      background-color: $primary20;
+      pointer-events: none;
+      cursor: default;
+    }
+  }
+}

@@ -1,0 +1,13 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
+import { NavigationComponent } from './navigation.component';
+
+@NgModule({
+  declarations: [NavigationComponent],
+  imports: [CommonModule, RouterModule, FontAwesomeModule],
+  exports: [NavigationComponent],
+})
+export class NavigationModule {}

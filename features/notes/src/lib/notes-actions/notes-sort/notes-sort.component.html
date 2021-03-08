@@ -1,0 +1,6 @@
+<ng-container *ngIf="(sortDirection$ | async) === 'asc'; else desc">
+  <fa-icon [icon]="['fas', 'arrow-circle-up']" (click)="createDateSortDesc()"></fa-icon>
+</ng-container>
+<ng-template #desc>
+  <fa-icon [icon]="['fas', 'arrow-circle-down']" (click)="createDateSortAsc()"></fa-icon>
+</ng-template>

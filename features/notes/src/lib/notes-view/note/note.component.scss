@@ -1,0 +1,33 @@
+:host {
+  .note-actions {
+    &-edit,
+    &-remove,
+    &-cancel,
+    &-save {
+      position: absolute;
+      font-size: 16px;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    &-edit,
+    &-save {
+      top: 0;
+      right: 0;
+    }
+
+    &-remove {
+      bottom: 0;
+      right: 0;
+    }
+
+    &-cancel {
+      top: 0;
+      right: 24px;
+    }
+  }
+}

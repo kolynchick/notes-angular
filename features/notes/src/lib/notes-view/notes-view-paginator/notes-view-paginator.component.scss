@@ -1,0 +1,12 @@
+@import '_colors';
+
+:host {
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+
+  button {
+    background-color: $primary20;
+    width: 250px;
+  }
+}

@@ -1,0 +1,9 @@
+export { NotesFacadeTestingModule } from './notes.facade.module';
+export { FilterFacadeTestingModule } from './+filter/filter.facade.module';
+export { ItemsFacadeTestingModule } from './+items/items.facade.module';
+export { ItemsServiceTestingModule } from './+items/items.service.module';
+export { ItemsApiServiceTestingModule } from './+items/items.api.service.module';
+export { PaginationFacadeTestingModule } from './+pagination/pagination.facade.module';
+export { SortFacadeTestingModule } from './+sort/sort.facade.module';
+export { ViewModeFacadeTestingModule } from './+view-mode/view-mode.facade.module';
+export { LoadingFacadeTestingModule } from './+items/+loading/loading.facade.module';
