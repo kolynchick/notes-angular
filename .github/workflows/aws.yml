@@ -1,4 +1,4 @@
-name: Deploy notes-angular client to AWS S3
+name: Deploy notes-angular to AWS S3 and EC2
 on: [push]
 jobs:
   run:
@@ -16,10 +16,10 @@ jobs:
         uses: MansaGroup/nrwl-nx-action@v2.1.0
         with:
           targets: build
-          projects: client
+          projects: client,api
           args: --prod
 
-      - name: Deploy
+      - name: Deploy client to AWS S3
         uses: reggionick/s3-deploy@v3
         with:
           folder: dist/apps/client
@@ -30,3 +30,13 @@ jobs:
           delete-removed: true
           no-cache: true
           private: true
+
+      - name: Deploy api to AWS EC2
+        run: |
+          scp -i "${{ secrets.AWS_EC2_PUBLIC_KEY }}" dist/apps/api/main.js ${{ secrets.AWS_EC2_HOST }}:~/node-server
+          ssh -v -i "${{ secrets.AWS_EC2_PUBLIC_KEY }}" ${{ secrets.AWS_EC2_HOST }}
+          cd ./node-server
+          pm2 delete main
+          export PORT=3000
+          export MONGO_DB_CLOUD_URI=${{ MONGO_DB_CLOUD_URI }}
+          pm2 start main
