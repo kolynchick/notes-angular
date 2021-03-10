@@ -47,5 +47,5 @@ jobs:
                   
       - name: Deploy api to AWS EC2
         run: |
-          ssh -v -i "${{ secrets.AWS_EC2_PUBLIC_KEY }}" ${{ secrets.AWS_EC2_HOST }}
+          ssh -v -i "$SSH_KEY_PATH" ${{ secrets.AWS_EC2_HOST }}
 
