@@ -41,10 +41,4 @@ jobs:
         run: |
           echo "${{ secrets.AWS_EC2_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           scp -o "StrictHostKeyChecking=no" dist/apps/api/main.js ${{ secrets.AWS_EC2_HOST }}:~/node-server
-          ssh -tt -o "StrictHostKeyChecking=no" ${{ secrets.AWS_EC2_HOST }}
-          cd ./node-server
-          pm2 delete main
-          export PORT=3000
-          export MONGO_DB_CLOUD_URI='${{ secrets.MONGO_DB_CLOUD_URI }}'
-          pm2 start main
-
+          ssh -tt -o "StrictHostKeyChecking=no" ${{ secrets.AWS_EC2_HOST }} "pm2 delete -f main && export PORT=3000 && export MONGO_DB_CLOUD_URI=${{ secrets.MONGO_DB_CLOUD_URI }} && pm2 start -f ~/node-server/main.js"
