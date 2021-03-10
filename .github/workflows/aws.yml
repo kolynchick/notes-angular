@@ -12,8 +12,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build
-        uses: mansagroup/nrwl-nx-action@v2
+      - name: Nrwl Nx
+        uses: MansaGroup/nrwl-nx-action@v2.1.0
         with:
           targets: build
           projects: client
