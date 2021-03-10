@@ -12,11 +12,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Install nx
-        run: npm install -g nx
-
       - name: Build
-        run: npx @nrwl/cli build --prod
+        uses: mansagroup/nrwl-nx-action@v2
+        with:
+          targets: build
+          projects: client
 
       - name: Deploy
         uses: reggionick/s3-deploy@v3
