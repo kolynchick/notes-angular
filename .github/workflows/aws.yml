@@ -34,9 +34,4 @@ jobs:
       - name: Deploy api to AWS EC2
         run: |
           scp -i "${{ secrets.AWS_EC2_PUBLIC_KEY }}" dist/apps/api/main.js ${{ secrets.AWS_EC2_HOST }}:~/node-server
-          ssh -v -i "${{ secrets.AWS_EC2_PUBLIC_KEY }}" ${{ secrets.AWS_EC2_HOST }}
-          cd ./node-server
-          pm2 delete main
-          export PORT=3000
-          export MONGO_DB_CLOUD_URI=${{ secrets.MONGO_DB_CLOUD_URI }}
-          pm2 start main
+
