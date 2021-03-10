@@ -33,10 +33,13 @@ jobs:
           private: true
          
       - name: Apply SSH private key
-        run: echo "${{ secrets.AWS_EC2_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        uses: webfactory/ssh-agent@v0.5.1
+        with:
+          ssh-private-key: ${{ secrets.AWS_EC2_PRIVATE_KEY }}
                   
       - name: Deploy api to AWS EC2
         run: |
+          echo "${{ secrets.AWS_EC2_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           scp -o "StrictHostKeyChecking=no" dist/apps/api/main.js ${{ secrets.AWS_EC2_HOST }}:~/node-server
           ssh -o "StrictHostKeyChecking=no" ${{ secrets.AWS_EC2_HOST }}
 
