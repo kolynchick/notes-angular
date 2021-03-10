@@ -40,5 +40,5 @@ jobs:
       - name: Deploy api to AWS EC2
         run: |
           echo "${{ secrets.AWS_EC2_PRIVATE_KEY }}" > ./private.key
-          ssh -v -i private.key ${{ secrets.AWS_EC2_HOST }}
+          ssh -v -i StrictHostKeyChecking=no private.key ${{ secrets.AWS_EC2_HOST }}
 
