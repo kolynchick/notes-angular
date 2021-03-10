@@ -19,14 +19,6 @@ jobs:
           targets: build
           projects: client,api
           args: --prod
-          
-      - name: Create SSH key
-        run: |
-          mkdir -p ~/.ssh/
-          echo "${{ secrets.AWS_EC2_PUBLIC_KEY }}" > ../private.key
-          sudo chmod 600 ../private.key
-          echo "${{ secrets.AWS_EC2_HOST }}" > ~/.ssh/known_hosts
-        shell: bash
 
       - name: Deploy client to AWS S3
         uses: reggionick/s3-deploy@v3
@@ -47,5 +39,6 @@ jobs:
                   
       - name: Deploy api to AWS EC2
         run: |
-          ssh -v -i "$SSH_KEY_PATH" ${{ secrets.AWS_EC2_HOST }}
+          echo "${{ secrets.AWS_EC2_PRIVATE_KEY }}" > ./private.key
+          ssh -v -i private.key ${{ secrets.AWS_EC2_HOST }}
 
