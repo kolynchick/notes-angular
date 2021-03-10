@@ -32,7 +32,7 @@ jobs:
           private: true
          
       - name: Apply SSH private key
-      - uses: webfactory/ssh-agent@v0.5.1
+        uses: webfactory/ssh-agent@v0.5.1
         with:
           ssh-private-key: ${{ secrets.AWS_EC2_PRIVATE_KEY }}
                   
