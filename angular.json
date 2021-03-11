@@ -163,7 +163,8 @@
           "options": {
             "main": "libs/dependencies/src/test.ts",
             "tsConfig": "libs/dependencies/tsconfig.spec.json",
-            "karmaConfig": "libs/dependencies/karma.conf.js"
+            "karmaConfig": "libs/dependencies/karma.conf.js",
+            "codeCoverage": true
           }
         }
       }

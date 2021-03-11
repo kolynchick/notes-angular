@@ -121,7 +121,7 @@ describe('notes', () => {
 
   describe('5. Workflow', () => {
     it('5.1 When clicked to plus button the note should be created', () => {
-      cy.intercept('POST', '/note').as('api');
+      cy.intercept('POST', '/note/getList').as('api');
 
       cy.get(
         'app-create-note app-note-edit-form textarea[formcontrolname="title"]'
@@ -138,11 +138,9 @@ describe('notes', () => {
 
       cy.get('app-create-note .note-actions-create').click();
 
-      cy.wait('@api').then((intercept: Interception) => {
-        const note = intercept.response?.body;
-
-        cy.get('app-note .title').first().should('have.text', note.title);
-        cy.get('app-note .message').first().should('have.text', note.message);
+      cy.wait('@api').then(() => {
+        cy.get('app-note .title').first().should('have.text', 'Title 1');
+        cy.get('app-note .message').first().should('have.text', 'Message 1');
       });
     });
 
@@ -200,13 +198,13 @@ describe('notes', () => {
 
       cy.get('app-note .note-actions-save').click();
 
-      cy.wait('@api');
-
-      cy.get('app-note .title').first().should('have.text', 'Title 3');
-      cy.get('app-note .message').first().should('have.text', 'Message 3');
+      cy.wait('@api').then(() => {
+        cy.get('app-note .title').first().should('have.text', 'Title 3');
+        cy.get('app-note .message').first().should('have.text', 'Message 3');
+      });
     });
 
-    it('5.3 When clicked to remove button the note should be removed', () => {
+    it('5.4 When clicked to remove button the note should be removed', () => {
       cy.intercept('POST', '/note/getList').as('api');
       cy.reload();
 
