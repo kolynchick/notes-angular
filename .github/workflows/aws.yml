@@ -14,11 +14,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run Unit tests
-        run: |
-          npm install -g nx
-          nx affected --target=test
-
       - name: Builds
         uses: MansaGroup/nrwl-nx-action@v2.1.0
         with:
