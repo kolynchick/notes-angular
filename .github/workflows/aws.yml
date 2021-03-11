@@ -48,5 +48,5 @@ jobs:
         uses: MansaGroup/nrwl-nx-action@v2.1.0
         with:
           targets: e2e
-          projects: env.UI_APP_E2E_PROJECT
-          args: --baseUrl=env.UI_APP_E2E_TARGET_HOST,--headless
+          projects: $UI_APP_E2E_PROJECT
+          args: --baseUrl=$UI_APP_E2E_TARGET_HOST,--headless
