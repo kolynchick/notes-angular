@@ -49,4 +49,4 @@ jobs:
         with:
           targets: e2e
           projects: $UI_APP_E2E_PROJECT
-          args: --baseUrl=$UI_APP_E2E_TARGET_HOST,--headless
+          args: --baseUrl=$UI_APP_E2E_TARGET_HOST --headless
