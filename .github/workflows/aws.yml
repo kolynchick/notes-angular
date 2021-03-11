@@ -14,6 +14,16 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Yarn install
+        run: yarn install --frozen-lockfile --non-interactive
+
+      - name: Retreive last test sha
+        id: last-test-sha
+        run: echo "::set-output name=sha::$(git rev-parse HEAD~1)"
+
+      - name: Run affected tests
+        run: npm run affected:test --base=${{ steps.last-test-sha.outputs.sha }} --head=remote/origin/master
+
       - name: Builds
         uses: MansaGroup/nrwl-nx-action@v2.1.0
         with:
