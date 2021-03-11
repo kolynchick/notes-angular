@@ -17,7 +17,8 @@ jobs:
       - name: Run Unit tests
         uses: MansaGroup/nrwl-nx-action@v2.1.0
         with:
-          targets: test
+          targets: test,
+          all: true
 
       - name: Builds
         uses: MansaGroup/nrwl-nx-action@v2.1.0
