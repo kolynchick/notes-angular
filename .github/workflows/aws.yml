@@ -14,7 +14,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Nrwl Nx
+      - name: Builds
         uses: MansaGroup/nrwl-nx-action@v2.1.0
         with:
           targets: build
@@ -45,4 +45,8 @@ jobs:
           ssh -tt -o "StrictHostKeyChecking=no" ${{ secrets.AWS_EC2_HOST }} "cd ./node-server; pm2 delete -f main ; export PORT=3000 ; export MONGO_DB_CLOUD_URI=${{ secrets.MONGO_DB_CLOUD_URI }} ; pm2 start -f main.js"
 
       - name: Run E2E Tests
-        run: nx e2e env.UI_APP_E2E_PROJECT --baseUrl=env.UI_APP_E2E_TARGET_HOST --headless
+        uses: MansaGroup/nrwl-nx-action@v2.1.0
+        with:
+          targets: e2e
+          projects: env.UI_APP_E2E_PROJECT
+          args: --baseUrl=env.UI_APP_E2E_TARGET_HOST,--headless
