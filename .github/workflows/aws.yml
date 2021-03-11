@@ -18,7 +18,6 @@ jobs:
         uses: MansaGroup/nrwl-nx-action@v2.1.0
         with:
           targets: test
-          affected: true
 
       - name: Builds
         uses: MansaGroup/nrwl-nx-action@v2.1.0
