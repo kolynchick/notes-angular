@@ -18,7 +18,7 @@ jobs:
         uses: MansaGroup/nrwl-nx-action@v2.1.0
         with:
           targets: test
-          args: --base=master,--head=HEAD
+          args: --base=master,--head=master
 
       - name: Builds
         uses: MansaGroup/nrwl-nx-action@v2.1.0
