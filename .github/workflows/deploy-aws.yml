@@ -1,5 +1,8 @@
 name: Deploy notes-angular to AWS S3 and EC2
-on: [push]
+on:
+  push:
+    branches:
+      - master
 jobs:
   run:
     runs-on: ubuntu-latest
