@@ -23,12 +23,16 @@ jobs:
         shell: bash
         run: echo $(${{ steps.currentBranch.outputs.branch }})
 
-      - name: Install dependencies
-        run: npm install
-
       - name: Retreive last test sha
         id: last-test-sha
         run: echo "::set-output name=sha::$(git rev-parse ${{ steps.currentBranch.outputs.branch }})"
+
+      - name: Check var
+        shell: bash
+        run: echo $(${{ steps.currentBranch.outputs.branch }}); echo $(git rev-parse remote/origin/master)
+
+      - name: Install dependencies
+        run: npm install
 
       - name: Run affected tests
         run: npm run affected:lint --base=${{ steps.last-test-sha.outputs.sha }} --head=remote/origin/master
