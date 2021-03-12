@@ -29,7 +29,7 @@ jobs:
 
       - name: Check var
         shell: bash
-        run: echo $(${{ steps.currentBranch.outputs.branch }}); echo $(git rev-parse remote/origin/master)
+        run: echo $(${{ steps.last-test-sha.outputs.sha }}); echo $(git rev-parse remote/origin/master)
 
       - name: Install dependencies
         run: npm install
