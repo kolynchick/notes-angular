@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
-import { NotesFacade, ViewMode } from '@notes-angular/store/notes';
+import { NotesFacade } from '@notes-angular/store/notes';
 
 @Component({
   selector: 'app-notes',

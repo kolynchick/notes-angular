@@ -1,14 +1,12 @@
-import { HttpEvent, HttpHandler, HttpRequest, HttpResponse } from '@angular/common/http';
+import { HttpRequest, HttpResponse } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { LoadingFacadeTestingModule } from '@notes-angular/store/notes/testing';
 import { of, throwError } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
-import { LoadingFacade } from './+loading/loading.facade';
 
 import { ItemsInterceptor } from './items.interceptor';
 
 describe('ItemsInterceptor', () => {
-  let loadingFacade: LoadingFacade;
   let service: ItemsInterceptor;
 
   beforeEach(() => {
@@ -17,7 +15,6 @@ describe('ItemsInterceptor', () => {
       providers: [ItemsInterceptor],
     });
 
-    loadingFacade = TestBed.inject(LoadingFacade);
     service = TestBed.inject(ItemsInterceptor);
   });
 
@@ -26,8 +23,8 @@ describe('ItemsInterceptor', () => {
       const handle$ = of(new HttpResponse());
 
       service
-        .intercept({} as HttpRequest<unknown>, { handle: () => handle$ } as any)
-        .subscribe((response: any) => {
+        .intercept({} as HttpRequest<unknown>, { handle: () => handle$ })
+        .subscribe((response) => {
           expect(response).toBeDefined();
           done();
         });
@@ -39,7 +36,7 @@ describe('ItemsInterceptor', () => {
       service
         .intercept({} as HttpRequest<unknown>, { handle: () => handle$ })
         .pipe(catchError(() => of('2')))
-        .subscribe((response: any) => {
+        .subscribe((response) => {
           expect(response).toEqual('2');
           done();
         });

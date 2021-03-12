@@ -24,11 +24,9 @@ export class NoteEditFormComponent implements OnInit, OnChanges, OnDestroy {
   @Output() changed: EventEmitter<Note> = new EventEmitter<Note>();
 
   public form!: FormGroup;
-  public edit: boolean = false;
+  public edit!: boolean
 
   private destroy$: Subject<void> = new Subject<void>();
-
-  constructor() {}
 
   ngOnInit(): void {
     this.form = new FormGroup({

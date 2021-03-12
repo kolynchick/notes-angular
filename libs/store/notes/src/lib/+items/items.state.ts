@@ -56,7 +56,7 @@ export class ItemsState {
 
   @Action(CreateItem)
   public createItem(
-    {}: StateContext<ItemsStateModel>,
+    _state: StateContext<ItemsStateModel>,
     { title, message }: CreateNotePayload
   ) {
     return this.itemsService.createNote(title, message);
@@ -77,7 +77,7 @@ export class ItemsState {
 
   @Action(RemoveItem)
   public removeItem(
-    {}: StateContext<ItemsStateModel>,
+    _state: StateContext<ItemsStateModel>,
     { id }: RemoveNotePayload
   ) {
     return this.itemsService.removeNote(id);

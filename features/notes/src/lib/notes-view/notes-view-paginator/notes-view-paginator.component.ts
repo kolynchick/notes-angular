@@ -6,7 +6,7 @@ import {
   PaginationFacade,
 } from '@notes-angular/store/notes';
 import { combineLatest, Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-notes-view-paginator',

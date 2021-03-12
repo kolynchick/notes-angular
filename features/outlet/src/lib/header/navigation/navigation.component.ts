@@ -14,7 +14,7 @@ import { Path } from './navigation.types';
   styleUrls: ['./navigation.component.scss'],
 })
 export class NavigationComponent implements OnInit {
-  public currentPath: string = '';
+  public currentPath!: string;
   public paths: Path[] = [
     {
       url: '/notes',

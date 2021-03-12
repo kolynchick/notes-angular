@@ -1,7 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FilterFacade } from '@notes-angular/store/notes';
 import { FilterFacadeTestingModule } from '@notes-angular/store/notes/testing';
-import { of } from 'rxjs';
 
 import { NotesFilterComponent } from './notes-filter.component';
 
