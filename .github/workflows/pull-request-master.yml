@@ -17,9 +17,14 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: currentBranch
+  
       - name: Retreive last test sha
         id: last-test-sha
-        run: echo "::set-output name=sha::$(git rev-parse HEAD~1)"
+        run: echo "::set-output name=sha::$(git rev-parse $ {{ steps.currentBranch.outputs.branch }})"
 
       - name: Run affected tests
         run: npm run affected:lint --base=${{ steps.last-test-sha.outputs.sha }} --head=remote/origin/master
