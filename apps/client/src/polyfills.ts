@@ -57,7 +57,7 @@
  */
 import 'zone.js/dist/zone'; // Included with Angular CLI.
 
-(window as { process: unknown }).process = {
+(window as { process: { env: { DEBUG?: string }} }).process = {
   env: { DEBUG: undefined },
 };
 
