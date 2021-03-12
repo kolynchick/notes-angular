@@ -13,18 +13,22 @@ jobs:
       UI_APP_E2E_TARGET_HOST: https://d0m2tqifnk.execute-api.us-east-2.amazonaws.com/
     steps:
       - uses: actions/checkout@v2
-      
-      - name: Install dependencies
-        run: npm install
-
+ 
       - name: Extract branch name
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: currentBranch
-  
+        
+      - name: Check var
+        shell: bash
+        run: echo $(${{ steps.currentBranch.outputs.branch }})
+
+      - name: Install dependencies
+        run: npm install
+
       - name: Retreive last test sha
         id: last-test-sha
-        run: echo "::set-output name=sha::$(git rev-parse $ {{ steps.currentBranch.outputs.branch }})"
+        run: echo "::set-output name=sha::$(git rev-parse ${{ steps.currentBranch.outputs.branch }})"
 
       - name: Run affected tests
         run: npm run affected:lint --base=${{ steps.last-test-sha.outputs.sha }} --head=remote/origin/master
