@@ -16,7 +16,7 @@ jobs:
  
       - name: Check var
         shell: bash
-        run: git rev-parse HEAD
+        run: git rev-parse ${remote/origin/master}
         
       - name: Check var 2
         shell: bash
