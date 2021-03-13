@@ -14,13 +14,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
  
-      - run: git fetch --no-tags --prune --depth=5 origin master
+      - run: git fetch origin master
  
       - name: Install dependencies
         run: npm install
 
       - name: Run affected tests
-        run: npm run affected:lint --base=origin/master
+        run: npm run affected:lint --base=remotes/origin/master --head=(git rev-parse ${GITHUB_SHA})
 
       - name: Run affected tests
-        run: npm run affected:test --base=origin/master
+        run: npm run affected:test --base=remotes/origin/master --head=(git rev-parse ${GITHUB_SHA})
