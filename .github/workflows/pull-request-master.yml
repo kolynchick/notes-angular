@@ -14,19 +14,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
  
-      - name: Check var
-        shell: bash
-        run: git rev-parse HEAD
-        
-      - name: Check var 2
-        shell: bash
-        run: |
-          git rev-parse ${GITHUB_SHA}
-          ${{ github.base_ref }}
-          ${{ github.head_ref }}
-          ${{ github.ref }}
-          ${{ github.sha }}
+      - name: Install dependencies
+        run: npm install
 
-      - name: Retreive last test sha
-        id: last-test-sha
-        run: echo "::set-output name=sha::$(git rev-parse ${GITHUB_SHA})"
+      - name: Run affected tests
+        run: npm run affected:lint --base=remotes/origin/master
+
+      - name: Run affected tests
+        run: npm run affected:test --base=remotes/origin/master
