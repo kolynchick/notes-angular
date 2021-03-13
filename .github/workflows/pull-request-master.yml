@@ -20,7 +20,7 @@ jobs:
         run: npm install
 
       - name: Run affected tests
-        run: npm run affected:lint --base=remotes/origin/master
+        run: npm run affected:lint --base=origin/master
 
       - name: Run affected tests
-        run: npm run affected:test --base=remotes/origin/master
+        run: npm run affected:test --base=origin/master
