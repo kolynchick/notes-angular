@@ -17,6 +17,14 @@ jobs:
  
       - run: git fetch origin master
       
+      - name: Retreive hash master
+        id: hash-master
+        run: echo "::set-output name=hash::$(git rev-parse origin/master})"
+  
+      - name: Retreive hash head
+        id: hash-head
+        run: echo "::set-output name=hash::$(git rev-parse ${GITHUB_SHA}})"
+        
       - name: Install dependencies
         run: npm install
 
@@ -25,4 +33,4 @@ jobs:
         with:
           targets: lint, test
           affected: true
-          args: --base=$(git rev-parse origin/master) --head=$(git rev-parse ${GITHUB_SHA})
+          args: --base=${{ steps.hash-master.outputs.hash }} --head=${{ steps.hash-head.outputs.hash }}
