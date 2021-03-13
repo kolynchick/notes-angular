@@ -7,30 +7,16 @@ jobs:
   run:
     runs-on: ubuntu-latest
     name: Check code with lint and unit tests
-    env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      UI_APP_E2E_PROJECT: client-e2e
-      UI_APP_E2E_TARGET_HOST: https://d0m2tqifnk.execute-api.us-east-2.amazonaws.com/
     steps:
       - uses: actions/checkout@v2
  
       - run: git fetch origin master
-      
-      - name: Retreive hash master
-        id: hash-master
-        run: echo "::set-output name=hash::$(git rev-parse origin/master)"
-  
-      - name: Retreive hash head
-        id: hash-head
-        run: echo "::set-output name=hash::$(git rev-parse ${GITHUB_SHA})"
         
       - name: Install dependencies
         run: npm install
 
-      - name: Builds
-        uses: MansaGroup/nrwl-nx-action@v2.1.0
-        with:
-          targets: lint, test
-          affected: true
-          args: --base=${{ steps.hash-master.outputs.hash }} --head=${{ steps.hash-head.outputs.hash }}
+      - name: Run affected tests
+        run: npm run affected:lint -- --base=$(git rev-parse origin/master) --head=$(git rev-parse ${GITHUB_SHA})
+
+      - name: Run affected tests
+        run: npm run affected:test -- --base=$(git rev-parse origin/master) --head=(git rev-parse ${GITHUB_SHA})
