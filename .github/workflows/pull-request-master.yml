@@ -18,7 +18,11 @@ jobs:
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: currentBranch
-        
+
+      - name: Check var
+        shell: bash
+        run: ls
+   
       - name: Check var
         shell: bash
         run: echo $(${{ steps.currentBranch.outputs.branch }})
