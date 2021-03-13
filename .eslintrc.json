@@ -23,7 +23,8 @@
       "extends": ["plugin:@nrwl/nx/typescript"],
       "parserOptions": { "project": "./tsconfig.*?.json" },
       "rules": {
-        "@typescript-eslint/ban-ts-comment": "off"
+        "@typescript-eslint/ban-ts-comment": "off",
+        "cypress/no-unnecessary-waiting": "off"
       }
     },
     {
