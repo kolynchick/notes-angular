@@ -21,7 +21,7 @@ jobs:
 
       - name: Check var
         shell: bash
-        run: ls
+        run: $GITHUB_SHA
    
       - name: Check var
         shell: bash
