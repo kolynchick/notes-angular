@@ -14,6 +14,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
  
+      - run: git fetch --no-tags --prune --depth=5 origin master
+ 
       - name: Install dependencies
         run: npm install
 
