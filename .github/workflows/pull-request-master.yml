@@ -22,6 +22,10 @@ jobs:
       - name: Check var
         shell: bash
         run: echo $(${{ steps.currentBranch.outputs.branch }})
+        
+      - name: Check var 2
+        shell: bash
+        run: git rev-parse ${{ steps.currentBranch.outputs.branch }}
 
       - name: Retreive last test sha
         id: last-test-sha
