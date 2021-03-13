@@ -1,22 +1,42 @@
-name: Pull request to master branch
+name: PR to master
+
 on:
   pull_request:
     branches:
       - master
+    types: [opened, reopened, synchronize]
+
 jobs:
-  run:
+  build:
+    # Setup OS and Node Version
     runs-on: ubuntu-latest
-    name: Check code with lint and unit tests
+    strategy:
+      matrix:
+        # Latest nodes only
+        node-version: [15.x]
+
+    # Define Steps
     steps:
+      # Checkout code
       - uses: actions/checkout@v2
- 
-      - run: git fetch origin master
-        
-      - name: Install dependencies
-        run: npm install
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
 
-      - name: Run affected tests
-        run: npm run affected:lint -- --base=origin/master~1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
 
-      - name: Run affected tests
-        run: npm run affected:test -- --base=origin/master~1
+      - name: Fetch other branches
+        run: git fetch --no-tags --prune --depth=5 origin master
+
+      - name: Install environment
+        run: |
+          rm -rf node_modules && rm -rf dist && rm -rf docs && rm -rf coverage
+          npm ci
+      - name: Run lint
+        run: ./.github/scripts/lint.sh False
+
+      - name: Tests coverage
+        run: ./.github/scripts/test.sh False True
