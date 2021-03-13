@@ -16,7 +16,7 @@ jobs:
  
       - name: Check var
         shell: bash
-        run: git rev-parse remote/origin/master
+        run: git rev-parse HEAD
 
       - name: Retreive last test sha
         id: last-test-sha
