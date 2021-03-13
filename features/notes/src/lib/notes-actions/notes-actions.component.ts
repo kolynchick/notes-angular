@@ -5,4 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './notes-actions.component.html',
   styleUrls: ['./notes-actions.component.scss'],
 })
-export class NotesActionsComponent {}
+export class NotesActionsComponent {} // TEST
