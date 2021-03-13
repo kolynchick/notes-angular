@@ -16,7 +16,7 @@ jobs:
  
       - name: Check var
         shell: bash
-        run: git rev-parse master
+        run: git rev-parse HEAD
         
       - name: Check var 2
         shell: bash
