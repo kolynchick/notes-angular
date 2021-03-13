@@ -19,11 +19,11 @@ jobs:
       
       - name: Retreive hash master
         id: hash-master
-        run: echo "::set-output name=hash::$(git rev-parse origin/master})"
+        run: echo "::set-output name=hash::$(git rev-parse origin/master)"
   
       - name: Retreive hash head
         id: hash-head
-        run: echo "::set-output name=hash::$(git rev-parse ${GITHUB_SHA}})"
+        run: echo "::set-output name=hash::$(git rev-parse ${GITHUB_SHA})"
         
       - name: Install dependencies
         run: npm install
