@@ -18,3 +18,12 @@ jobs:
       - run: git fetch origin master
       
       - run: git rev-parse origin/master
+      
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run affected tests
+        run: npm run affected:lint --base=$(git rev-parse origin/master) --head=$(git rev-parse ${GITHUB_SHA})
+
+      - name: Run affected tests
+        run: npm run affected:test --base=$(git rev-parse origin/master) --head=(git rev-parse ${GITHUB_SHA})
