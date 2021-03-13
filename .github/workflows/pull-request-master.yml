@@ -16,7 +16,7 @@ jobs:
         run: npm install
 
       - name: Run affected tests
-        run: npm run affected:lint -- --base=$(git rev-parse origin/master~1)
+        run: npm run affected:lint -- --base=origin/master~1
 
       - name: Run affected tests
-        run: npm run affected:test -- --base=$(git rev-parse origin/master~1)
+        run: npm run affected:test -- --base=origin/master~1
