@@ -20,8 +20,8 @@ jobs:
         
       - name: Check var 2
         shell: bash
-        run: git rev-parse "$GITHUB_SHA"
+        run: git rev-parse ${GITHUB_SHA}
 
       - name: Retreive last test sha
         id: last-test-sha
-        run: echo "::set-output name=sha::$(git rev-parse $GITHUB_SHA)"
+        run: echo "::set-output name=sha::$(git rev-parse ${GITHUB_SHA})"
