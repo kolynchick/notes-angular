@@ -17,6 +17,10 @@ jobs:
       - name: Check var
         shell: bash
         run: git rev-parse HEAD
+        
+      - name: Check var 2
+        shell: bash
+        run: git rev-parse "$GITHUB_SHA"
 
       - name: Retreive last test sha
         id: last-test-sha
