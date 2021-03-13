@@ -14,27 +14,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
  
-      - name: Extract branch name
-        shell: bash
-        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-        id: currentBranch
-
       - name: Check var
         shell: bash
-        run: git rev-parse "$GITHUB_SHA"
-   
-      - name: Check var
-        shell: bash
-        run: echo $(${{ steps.currentBranch.outputs.branch }})
-        
-      - name: Check var 2
-        shell: bash
-        run: git rev-parse $(${{ steps.currentBranch.outputs.branch }})
+        run: git rev-parse remote/origin/master
 
       - name: Retreive last test sha
         id: last-test-sha
-        run: echo "::set-output name=sha::$(git rev-parse ${{ steps.currentBranch.outputs.branch }})"
-
-      - name: Check var
-        shell: bash
-        run: echo $(${{ steps.last-test-sha.outputs.sha }})
+        run: echo "::set-output name=sha::$(git rev-parse $GITHUB_SHA)"
