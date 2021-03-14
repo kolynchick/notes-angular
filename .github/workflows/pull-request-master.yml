@@ -5,8 +5,8 @@ on:
     types: [opened, reopened, synchronize]
 
 jobs:
-  name: PR to master
   build:
+    name: PR to master
     # Setup OS and Node Version
     runs-on: ubuntu-latest
     strategy:
