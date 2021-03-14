@@ -8,4 +8,4 @@ const noteSchema = {
 
 export const NoteSchema = new Schema(noteSchema);
 
-export const NOTE_MODEL_PROVIDE_KEY = Symbol('NOTE_MODEL');
+export const NOTE_MODEL_PROVIDE_KEY = 'NOTE_MODEL';

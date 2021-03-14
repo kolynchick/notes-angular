@@ -297,7 +297,11 @@
           "outputs": ["coverage/apps/api"],
           "options": {
             "jestConfig": "apps/api/jest.config.js",
-            "passWithNoTests": true
+            "passWithNoTests": true,
+            "codeCoverage": true
+          },
+          "codeCoverage": {
+            "exclude": ["apps/api/testing"]
           }
         }
       }

@@ -1,19 +1,17 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { FilterQuery, Model, Query, QueryOptions, Types } from 'mongoose';
+import { FilterQuery, Model, Types } from 'mongoose';
 import { Note } from '@notes-angular/models';
-import { combineLatest, EMPTY, from, Observable } from 'rxjs';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { combineLatest, from, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { NoteEntity } from './note.models';
 
 import { NOTE_MODEL_PROVIDE_KEY } from './note.schema';
 import { convertToNote } from './note.helpers';
 import {
   CreateNoteRequestDTO,
-  CreateNoteResponseDTO,
   GetNotesResponseDTO,
   RemoveNoteResponseDTO,
   SaveNoteRequestDTO,
-  SaveNoteResponseDTO,
 } from '@notes-angular/dto';
 import { GetNotesDto } from './dto/get-notes.dto';
 
@@ -22,16 +20,6 @@ export class NoteService {
   constructor(
     @Inject(NOTE_MODEL_PROVIDE_KEY) private noteModel: Model<NoteEntity>
   ) {}
-
-  public getAllNotes(): Observable<GetNotesResponseDTO> {
-    return from(this.noteModel.find()).pipe(
-      map((noteEntities: NoteEntity[]) => noteEntities.map(convertToNote)),
-      map((notes: Note[]) => ({
-        notes,
-        totalCount: notes.length,
-      }))
-    );
-  }
 
   public getNotes(getNotesDto: GetNotesDto): Observable<GetNotesResponseDTO> {
     const {
@@ -83,9 +71,7 @@ export class NoteService {
     );
   }
 
-  public createNote(
-    createNoteDto: CreateNoteRequestDTO
-  ): Observable<CreateNoteResponseDTO> {
+  public createNote(createNoteDto: CreateNoteRequestDTO): Observable<Note> {
     const model: NoteEntity = new this.noteModel(createNoteDto);
     return from(model.save()).pipe(
       map((noteEntity: NoteEntity) => convertToNote(noteEntity))
@@ -95,7 +81,7 @@ export class NoteService {
   public saveNote(
     id: string,
     saveNoteDto: SaveNoteRequestDTO
-  ): Observable<SaveNoteResponseDTO> {
+  ): Observable<Note> {
     return from(
       this.noteModel.findByIdAndUpdate(id, saveNoteDto, { new: true })
     ).pipe(map((noteEntity: NoteEntity) => convertToNote(noteEntity)));
@@ -103,7 +89,7 @@ export class NoteService {
 
   public removeNote(id: string): Observable<RemoveNoteResponseDTO> {
     return from(this.noteModel.findByIdAndDelete(id)).pipe(
-      switchMap(() => EMPTY)
+      map(() => undefined)
     );
   }
 }

@@ -15,7 +15,6 @@ import {
   SaveNoteResponseDTO,
 } from '@notes-angular/dto';
 import { Observable } from 'rxjs';
-import { delay } from 'rxjs/operators';
 import { CreateNoteDto } from './dto/create-note.dto';
 import { GetNotesDto } from './dto/get-notes.dto';
 import { SaveNoteDto } from './dto/save-note.dto';
@@ -25,18 +24,11 @@ import { NoteService } from './note.service';
 export class NoteController {
   constructor(private noteService: NoteService) {}
 
-  @Get('getList')
-  public getAllNotes(): Observable<GetNotesResponseDTO> {
-    return this.noteService.getAllNotes();
-  }
-
   @Post('getList')
   public getList(
     @Body() getNotesDto: GetNotesDto
   ): Observable<GetNotesResponseDTO> {
-    return this.noteService.getNotes(getNotesDto).pipe(
-      delay(1000)
-    );
+    return this.noteService.getNotes(getNotesDto);
   }
 
   @Post('')
@@ -47,7 +39,7 @@ export class NoteController {
   }
 
   @Get(':id')
-  public getNote(@Param() id: string): Observable<GetNoteByIdResponseDTO> {
+  public getNoteById(@Param() id: string): Observable<GetNoteByIdResponseDTO> {
     return this.noteService.getNoteById(id);
   }
 
