@@ -157,15 +157,6 @@
               "libs/dependencies/src/**/*.html"
             ]
           }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "libs/dependencies/src/test.ts",
-            "tsConfig": "libs/dependencies/tsconfig.spec.json",
-            "karmaConfig": "libs/dependencies/karma.conf.js",
-            "codeCoverage": true
-          }
         }
       }
     },
@@ -297,7 +288,11 @@
           "outputs": ["coverage/apps/api"],
           "options": {
             "jestConfig": "apps/api/jest.config.js",
-            "passWithNoTests": true
+            "passWithNoTests": true,
+            "codeCoverage": true
+          },
+          "codeCoverage": {
+            "exclude": ["apps/api/testing"]
           }
         }
       }
@@ -328,14 +323,6 @@
               "libs/models/src/**/*.html"
             ]
           }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "libs/models/src/test.ts",
-            "tsConfig": "libs/models/tsconfig.spec.json",
-            "karmaConfig": "libs/models/karma.conf.js"
-          }
         }
       }
     },
@@ -364,14 +351,6 @@
               "libs/dto/src/**/*.ts",
               "libs/dto/src/**/*.html"
             ]
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "libs/dto/src/test.ts",
-            "tsConfig": "libs/dto/tsconfig.spec.json",
-            "karmaConfig": "libs/dto/karma.conf.js"
           }
         }
       }
