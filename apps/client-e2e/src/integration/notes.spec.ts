@@ -182,7 +182,7 @@ describe('notes', () => {
     });
 
     it('5.3 When trying to edit a form and click to the save button the value should be saved', () => {
-      cy.intercept('POST', '/note/getList').as('api');
+      cy.intercept('PATCH', '/note').as('api');
 
       cy.get('app-note .note-actions-edit').first().click();
 
@@ -198,9 +198,11 @@ describe('notes', () => {
 
       cy.get('app-note .note-actions-save').click();
 
-      cy.wait('@api').then(() => {
-        cy.get('app-note .title').first().should('have.text', 'Title 3');
-        cy.get('app-note .message').first().should('have.text', 'Message 3');
+      cy.wait('@api').then((intercept: Interception) => {
+        const note = intercept.response?.body;
+
+        expect(note.title).equal('Title 3');
+        expect(note.message).equal('Message 3');
       });
     });
 
