@@ -3,7 +3,7 @@ set -o errexit -o noclobber -o nounset -o pipefail
 
 RUN_ALL=${1:-"False"}
 WITH_COVERAGE=${2:-"True"}
-BASE="origin/master~1"
+BASE="origin/master~0"
 
 
 COVERAGE_RULE=$([[ "$WITH_COVERAGE" == 'True' ]] && echo "--codeCoverage" || echo "")
