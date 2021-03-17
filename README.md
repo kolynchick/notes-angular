@@ -2,104 +2,45 @@
 
 # NotesAngular
 
-This project was generated using [Nx](https://nx.dev).
+Web page: https://d0m2tqifnk.execute-api.us-east-2.amazonaws.com/
 
-<p align="center"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+# Project description
 
-🔎 **Nx is a set of Extensible Dev Tools for Monorepos.**
+The application serves for managing projects in a small teams. 
 
-## Quick Start & Documentation
+## Primary goal
 
-[Nx Documentation](https://nx.dev/angular)
+We have some kind of objectives or tasks. We're creating notes with a small information about it (title and description).
+After it we're moving to the board with tasks and move it to the board for further work.
 
-[10-minute video showing all Nx features](https://nx.dev/angular/getting-started/what-is-nx)
+## At the moment
 
-[Interactive Tutorial](https://nx.dev/angular/tutorial/01-create-application)
-
-## Adding capabilities to your workspace
-
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
-
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
-
-Below are our core plugins:
-
-- [Angular](https://angular.io)
-  - `ng add @nrwl/angular`
-- [React](https://reactjs.org)
-  - `ng add @nrwl/react`
-- Web (no framework frontends)
-  - `ng add @nrwl/web`
-- [Nest](https://nestjs.com)
-  - `ng add @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `ng add @nrwl/express`
-- [Node](https://nodejs.org)
-  - `ng add @nrwl/node`
-
-There are also many [community plugins](https://nx.dev/nx-community) you could add.
-
-## Generate an application
-
-Run `ng g @nrwl/angular:app my-app` to generate an application.
-
-> You can use any of the plugins above to generate applications as well.
-
-When using Nx, you can create multiple applications and libraries in the same workspace.
-
-## Generate a library
-
-Run `ng g @nrwl/angular:lib my-lib` to generate a library.
-
-> You can also use any of the plugins above to generate libraries as well.
-
-Libraries are shareable across libraries and applications. They can be imported from `@notes-angular/mylib`.
-
-## Development server
-
-Run `ng serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng g component my-component --project=my-app` to generate a new component.
-
-## Build
-
-Run `ng build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test my-app` to execute the unit tests via [Jest](https://jestjs.io).
-
-Run `nx affected:test` to execute the unit tests affected by a change.
-
-## Running end-to-end tests
-
-Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
-
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
-
-## Understand your workspace
-
-Run `nx dep-graph` to see a diagram of the dependencies of your projects.
-
-## Further help
-
-Visit the [Nx Documentation](https://nx.dev/angular) to learn more.
+I have the CRUD operations for notes with sorting, filter and pagination.
 
 
+# Technology stack:
 
+## Frontend
 
+Angular 11+, Material UI, RxJS, NgXS, Karma + Jasmine (Unit tests), Nrwl NX (CLI)
 
+## Backend
+NestJS, Jest (Unit tests)
 
-## ☁ Nx Cloud
+## E2E
+Cypress
 
-### Computation Memoization in the Cloud
+## CI/CD
+Github Actions with several workflows:
+1) Pull Request - lint the code (ESLint), running Unit tests
+2) Merge to master - frontend deploys to the AWS S3. Backend deploys to AWS EC2, running E2E tests
 
-<p align="center"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-cloud-card.png"></p>
+# Future
 
-Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
-
-Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
-
-Visit [Nx Cloud](https://nx.app/) to learn more.
+- Support i18n
+- Authoriation, registration, Admin page for managing users (solutions: custom auth microservice with roles and admin page; WSO2; AWS SSO)
+- The page with transforming notes to task should implement. It should work on the Scrum process (To Do, In Progress, Done)
+- The page for managing task boards should implement
+- Board collaboration in real-time
+- Chat rooms for discussing
+- Create meetings for voice discussing
