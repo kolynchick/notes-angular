@@ -10,7 +10,7 @@ import { ViewMode, ViewModeStateModel } from './view-mode.model';
 @State<ViewModeStateModel>({
   name: 'viewMode',
   defaults: {
-    viewMode: 'big-tiles',
+    viewMode: 'lines',
   },
 })
 @Injectable()
