@@ -1,0 +1,12 @@
+@media screen and (max-width: 1024px) {
+  fa-icon.small-tiles {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  fa-icon.big-tiles,
+  fa-icon.lines {
+    display: none;
+  }
+}

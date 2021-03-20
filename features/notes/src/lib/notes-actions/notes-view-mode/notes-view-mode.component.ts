@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-notes-view-mode',
   templateUrl: './notes-view-mode.component.html',
-  styleUrls: ['./notes-view-mode.component.scss'],
+  styleUrls: ['./notes-view-mode.component.scss', './notes-view-mode.mobile.component.scss'],
 })
 export class NotesViewModeComponent implements OnInit {
   public viewMode$!: Observable<ViewMode>;
