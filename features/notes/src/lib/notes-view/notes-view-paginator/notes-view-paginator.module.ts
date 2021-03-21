@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NotesViewPaginatorComponent } from './notes-view-paginator.component';
-import { MaterialModule } from '@notes-angular/dependencies';
+import { MaterialModule, TranslocoModule } from '@notes-angular/dependencies';
 
 @NgModule({
   declarations: [NotesViewPaginatorComponent],
-  imports: [CommonModule, MaterialModule],
+  imports: [CommonModule, MaterialModule, TranslocoModule],
   exports: [NotesViewPaginatorComponent],
 })
 export class NotesViewPaginatorModule {}

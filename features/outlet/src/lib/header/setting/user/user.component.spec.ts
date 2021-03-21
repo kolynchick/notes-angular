@@ -8,14 +8,13 @@ describe('UserComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [UserComponent],
+      declarations: [ UserComponent ]
+    }).overrideComponent(UserComponent, {
+      set: {
+        template: ''
+      }
     })
-      .overrideComponent(UserComponent, {
-        set: {
-          template: '',
-        },
-      })
-      .compileComponents();
+    .compileComponents();
   });
 
   beforeEach(() => {

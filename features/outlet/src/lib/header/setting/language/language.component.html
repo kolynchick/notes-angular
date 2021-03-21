@@ -1,0 +1,11 @@
+<div class="lang-title">{{ 'HEADER_LANGUAGE_TITLE'| transloco }}</div>
+<div class="lang-container">
+  <ng-container *ngIf="(availableLanguages$ | async) as availableLanguages">
+    <ng-container *ngIf="(activeLanguage$ | async) as activeLanguage">
+      <div class="lang" *ngFor="let lang of availableLanguages" [ngClass]="{'select': lang === activeLanguage}" [class]="lang"
+        (click)="setLanguage(lang)">
+        <mat-icon [svgIcon]="'i18n:' + lang"></mat-icon>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>

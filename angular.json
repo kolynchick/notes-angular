@@ -430,6 +430,44 @@
           }
         }
       }
+    },
+    "store-translation": {
+      "projectType": "library",
+      "root": "libs/store/translation",
+      "sourceRoot": "libs/store/translation/src",
+      "prefix": "notes-angular",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:ng-packagr-lite",
+          "options": {
+            "tsConfig": "libs/store/translation/tsconfig.lib.json",
+            "project": "libs/store/translation/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/store/translation/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/store/translation/src/**/*.ts",
+              "libs/store/translation/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/store/translation/src/test.ts",
+            "tsConfig": "libs/store/translation/tsconfig.spec.json",
+            "karmaConfig": "libs/store/translation/karma.conf.js",
+            "codeCoverage": true
+          }
+        }
+      }
     }
   },
   "cli": {

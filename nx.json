@@ -53,6 +53,9 @@
     },
     "store-notes": {
       "tags": []
+    },
+    "store-translation": {
+      "tags": []
     }
   }
 }

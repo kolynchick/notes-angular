@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { DateAdapter } from '@angular/material/core';
 import { Filter, FilterFacade } from '@notes-angular/store/notes';
+import { TranslationFacade } from '@notes-angular/store/translation';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -18,7 +20,11 @@ export class NotesFilterComponent implements OnInit {
 
   private destroy$: Subject<void> = new Subject<void>();
 
-  constructor(private filterFacade: FilterFacade) {}
+  constructor(
+    private filterFacade: FilterFacade,
+    private translationFacade: TranslationFacade,
+    private dateAdapter: DateAdapter<Date>
+  ) {}
 
   ngOnInit(): void {
     this.filterFacade
@@ -29,6 +35,13 @@ export class NotesFilterComponent implements OnInit {
           createStartDate: new Date(filter.createStartDate),
           createEndDate: new Date(filter.createEndDate),
         });
+      });
+
+    this.translationFacade
+      .getActiveLanguage()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((activeLanguage: string) => {
+        this.dateAdapter.setLocale(activeLanguage);
       });
   }
 

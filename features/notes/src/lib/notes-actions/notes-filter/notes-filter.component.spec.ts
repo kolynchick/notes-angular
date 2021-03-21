@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FilterFacadeTestingModule } from '@notes-angular/store/notes/testing';
+import { TranslationFacadeTestingModule } from '@notes-angular/store/translation/testing';
 
 import { NotesFilterComponent } from './notes-filter.component';
 
@@ -9,7 +10,10 @@ describe('NotesFilterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FilterFacadeTestingModule],
+      imports: [
+        FilterFacadeTestingModule,
+        TranslationFacadeTestingModule
+      ],
       declarations: [NotesFilterComponent],
     })
       .overrideComponent(NotesFilterComponent, {

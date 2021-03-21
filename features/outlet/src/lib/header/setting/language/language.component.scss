@@ -1,0 +1,42 @@
+@import "_colors";
+
+:host {
+  padding-top: 12px;
+
+  .lang-title {
+    font-size: 18px;
+    padding-bottom: 6px;
+  }
+
+  .lang-container {
+    display: flex;
+
+    .lang {
+      margin-left: 4px;
+      margin-right: 4px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      cursor: pointer;
+  
+      &:first-child {
+        margin-left: 0;
+      }
+  
+      &:last-child {
+        margin-right: 0;
+      }
+
+      &:hover {
+        border: 2px solid $primary50;
+      }
+
+      &.select {
+        border: 2px solid $primary;
+        pointer-events: none;
+        cursor: default;
+      }
+    }
+  }
+}
