@@ -16,14 +16,20 @@
     "baseUrl": ".",
     "paths": {
       "@notes-angular/dependencies": ["libs/dependencies/src/index.ts"],
-      "@notes-angular/dependencies/testing": ["libs/dependencies/testing/index.ts"],
+      "@notes-angular/dependencies/testing": [
+        "libs/dependencies/testing/index.ts"
+      ],
       "@notes-angular/environments": [
         "apps/client/src/environments/environment.ts"
       ],
       "@notes-angular/features/notes": ["features/notes/src/index.ts"],
-      "@notes-angular/features/notes/testing": ["features/notes/testing/index.ts"],
+      "@notes-angular/features/notes/testing": [
+        "features/notes/testing/index.ts"
+      ],
       "@notes-angular/features/outlet": ["features/outlet/src/index.ts"],
-      "@notes-angular/features/outlet/testing": ["features/outlet/testing/index.ts"],
+      "@notes-angular/features/outlet/testing": [
+        "features/outlet/testing/index.ts"
+      ],
       "@notes-angular/models": ["libs/models/src/index.ts"],
       "@notes-angular/dto": ["libs/dto/src/index.ts"],
       "@notes-angular/api/testing": ["apps/api/testing/index.ts"],
@@ -32,7 +38,15 @@
       "@notes-angular/common": ["libs/common/src/index.ts"],
       "@notes-angular/common/testing": ["libs/common/testing/index.ts"],
       "@notes-angular/store/notes": ["libs/store/notes/src/index.ts"],
-      "@notes-angular/store/notes/testing": ["libs/store/notes/testing/index.ts"]
+      "@notes-angular/store/notes/testing": [
+        "libs/store/notes/testing/index.ts"
+      ],
+      "@notes-angular/store/translation": [
+        "libs/store/translation/src/index.ts"
+      ],
+      "@notes-angular/store/translation/testing": [
+        "libs/store/translation/testing/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

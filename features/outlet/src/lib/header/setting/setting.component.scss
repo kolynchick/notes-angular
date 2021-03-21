@@ -1,0 +1,27 @@
+@import "_colors";
+
+app-setting {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  fa-icon {
+    font-size: 28px;
+    cursor: pointer;
+  }
+}
+
+.overlay-panel-setting {
+  width: 200px;
+  background-color: $white;
+  border: 2px solid $primary;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.overlay-backdrop-setting {
+  background-color: transparent;
+}

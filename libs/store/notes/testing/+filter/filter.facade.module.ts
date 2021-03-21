@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { DateAdapter } from '@angular/material/core';
 import { NgxsModule } from '@ngxs/store';
 import { FilterFacade } from '@notes-angular/store/notes';
 import { FilterFacadeMock } from './filter.facade.mock';
@@ -9,6 +10,10 @@ import { FilterFacadeMock } from './filter.facade.mock';
     {
       provide: FilterFacade,
       useClass: FilterFacadeMock,
+    },
+    {
+      provide: DateAdapter,
+      useValue: { setLocale() {} },
     },
   ],
 })

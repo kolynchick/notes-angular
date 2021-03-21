@@ -11,8 +11,6 @@ export function getRangeDate(
     );
   }
 
-
-
   startDate.setHours(0, 0, 0, 0);
   endDate.setHours(23, 59, 59, 999);
 

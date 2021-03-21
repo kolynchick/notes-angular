@@ -1,0 +1,8 @@
+<fa-icon cdkOverlayOrigin #trigger="cdkOverlayOrigin" [icon]="['fas', 'cog']" (click)="show()"></fa-icon>
+<ng-template cdkConnectedOverlay [cdkConnectedOverlayOpen]="(showPanel$ | async)!" [cdkConnectedOverlayOrigin]="trigger"
+  [cdkConnectedOverlayHasBackdrop]="true" [cdkConnectedOverlayPanelClass]="['overlay-panel-setting']"
+  [cdkConnectedOverlayPositions]="panelPosition" cdkConnectedOverlayBackdropClass="overlay-backdrop-setting"
+  (backdropClick)="hide()">
+  <app-user></app-user>
+  <app-language></app-language>
+</ng-template>

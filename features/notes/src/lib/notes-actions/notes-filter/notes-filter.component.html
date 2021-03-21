@@ -1,6 +1,6 @@
 <form [formGroup]="form">
   <mat-form-field>
-    <mat-label>Create Date</mat-label>
+    <mat-label>{{ 'NOTES_FILTER_CREATE_DATE' | transloco }}</mat-label>
     <mat-date-range-input [rangePicker]="picker" [max]="currentDate">
       <input matStartDate formControlName="createStartDate" readonly/>
       <input matEndDate formControlName="createEndDate" (dateChange)="dateChange()" readonly/>

@@ -36,12 +36,8 @@ describe('notes', () => {
       );
     });
 
-    it('1.3 The view mode by default is a big tiles', () => {
-      cy.get('app-notes-view-mode fa-icon')
-        .last()
-        .should('have.class', 'select');
-
-      cy.get('app-notes-view .grid').should('have.class', 'big-tiles');
+    it('1.3 The view mode by default is a lines', () => {
+      cy.get('app-notes-view .grid').should('have.class', 'lines');
     });
   });
 
@@ -108,14 +104,14 @@ describe('notes', () => {
   });
 
   describe('4. View Mode', () => {
-    it('4.1 When clicked to button with lines max notes in a row should be equal 1', () => {
-      cy.get('app-notes-view-mode fa-icon').its(0).click();
-      cy.get('app-notes-view .grid').should('have.class', 'lines');
-    });
-
-    it('4.2 When clicked to button small tiles max notes in a row should be equal 4', () => {
+    it('4.1 When clicked to button small tiles max notes in a row should be equal 4', () => {
       cy.get('app-notes-view-mode fa-icon').its(1).click();
       cy.get('app-notes-view .grid').should('have.class', 'small-tiles');
+    });
+
+    it('4.1 When clicked to button big tiles max notes in a row should be equal 2', () => {
+      cy.get('app-notes-view-mode fa-icon').its(2).click();
+      cy.get('app-notes-view .grid').should('have.class', 'big-tiles');
     });
   });
 

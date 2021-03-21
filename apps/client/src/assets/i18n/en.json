@@ -1,1 +1,7 @@
-{}
+{
+  "HEADER_USER_DUMMY": "John Smit",
+  "HEADER_LANGUAGE_TITLE": "Language:",
+  "HEADER_LOGOUT": "Logout",
+  "NOTES_FILTER_CREATE_DATE": "Create Date",
+  "NOTES_PAGINATION_LOAD_MORE": "Load More"
+}

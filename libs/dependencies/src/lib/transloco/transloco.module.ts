@@ -2,25 +2,30 @@ import {
   TRANSLOCO_LOADER,
   TRANSLOCO_CONFIG,
   translocoConfig,
-  TranslocoModule,
+  TranslocoModule as TranslocoLibModule,
+  TRANSLOCO_TRANSPILER,
+  FunctionalTranspiler,
+  TranslocoService,
 } from '@ngneat/transloco';
 import { NgModule } from '@angular/core';
 import { TranslocoHttpLoader } from './transloco-http.loader';
 
-
 @NgModule({
-  exports: [TranslocoModule],
+  exports: [TranslocoLibModule],
   providers: [
     {
       provide: TRANSLOCO_CONFIG,
       useValue: translocoConfig({
-        availableLangs: ['en'],
-        defaultLang: 'en',
         reRenderOnLangChange: true,
-        prodMode: true
+        prodMode: true,
       }),
     },
     { provide: TRANSLOCO_LOADER, useClass: TranslocoHttpLoader },
+    {
+      provide: TRANSLOCO_TRANSPILER,
+      useClass: FunctionalTranspiler,
+    },
+    TranslocoService,
   ],
 })
-export class TranslocoRootModule {}
+export class TranslocoModule {}
