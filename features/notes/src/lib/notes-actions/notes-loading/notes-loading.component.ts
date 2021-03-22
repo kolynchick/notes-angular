@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-notes-loading',
   templateUrl: './notes-loading.component.html',
-  styleUrls: ['./notes-loading.component.scss'],
+  styleUrls: ['./notes-loading.component.scss', './notes-loading.mobile.component.scss'],
 })
 export class NotesLoadingComponent implements OnInit {
   public loading$!: Observable<boolean>;
