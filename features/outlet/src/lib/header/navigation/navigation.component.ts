@@ -19,7 +19,7 @@ export class NavigationComponent implements OnInit {
     {
       url: '/notes',
       icon: ['far', 'sticky-note'],
-      name: 'Notes',
+      name: 'HEADER_ROUTE_NOTE',
     },
   ];
 
